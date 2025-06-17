@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <%@ include file="../layouts/header.jsp" %>
 
-<a href="/resources/images/background.jpg" download="바꾼이름.jpg">배경 이미지</a>
-
 <!-- 게시글 제목 -->
 <h1 class="page-header my-4">
     <i class="far fa-file-alt"></i> ${board.title}

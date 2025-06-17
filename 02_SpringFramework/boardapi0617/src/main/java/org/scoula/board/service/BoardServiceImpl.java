@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
   // 게시글 등록 서비스
   @Transactional  // 여러 DB 작업을 하나의 트랜잭션으로 처리
   @Override
-  public void create(BoardDTO dto) {
+  public BoardDTO create(BoardDTO dto) {
 
     // 1. 게시글 등록
     log.info("create......" + dto);
@@ -69,28 +69,29 @@ public class BoardServiceImpl implements BoardService {
       upload(vo.getNo(), files);  // 게시글 번호가 필요하므로 게시글 등록 후 처리
     }
 
-    throw new RuntimeException("강제 발생");
+    return get(vo.getNo());
   }
 
 
 
   // 게시글 수정 서비스
   @Override
-  public boolean update(BoardDTO board) {
+  public BoardDTO update(BoardDTO board) {
     log.info("update......" + board);
 
-    int affectedRows = boardMapper.update(board.toVo());  // 영향받은 행 수 반환
-    return affectedRows == 1;                        // 1개 행이 수정되면 성공
+    boardMapper.update(board.toVo());  // 영향받은 행 수 반환
+    return get(board.getNo());
   }
 
 
   // 게시글 삭제 서비스
   @Override
-  public boolean delete(Long no) {
+  public BoardDTO delete(Long no) {
     log.info("delete...." + no);
 
-    int affectedRows = boardMapper.delete(no);     // 삭제된 행 수 반환
-    return affectedRows == 1;                 // 1개 행이 삭제되면 성공
+    BoardDTO board = get(no);   // 삭제 전 게시글 정보를 미리 조회
+    boardMapper.delete(no);     // 삭제된 행 수 반환
+    return board;
   }
 
 

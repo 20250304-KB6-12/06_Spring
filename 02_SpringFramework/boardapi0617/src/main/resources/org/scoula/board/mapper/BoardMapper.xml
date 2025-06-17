@@ -104,7 +104,7 @@
         <result column="bno" property="bno"/>
         <result column="filename" property="filename"/>
         <result column="path" property="path"/>
-        <result column="content_type" property="contentType"/>
+        <result column="contentType" property="contentType"/>
         <result column="size" property="size"/>
         <result column="a_reg_date" property="regDate"/>
     </resultMap>
